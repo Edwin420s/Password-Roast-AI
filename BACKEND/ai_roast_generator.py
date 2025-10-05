@@ -1,5 +1,6 @@
 import os
 import random
+from typing import Dict, List
 from openai import OpenAI
 from dotenv import load_dotenv
 
