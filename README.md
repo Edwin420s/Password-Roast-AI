@@ -130,7 +130,7 @@ Password-Roast-AI/
 The application provides a REST API for programmatic access:
 
 #### Analyze Password
-**Endpoint**: `POST /analyze`
+**Endpoint**: `POST /api/analyze`
 
 **Request Body**:
 ```json
@@ -144,27 +144,46 @@ The application provides a REST API for programmatic access:
 {
   "password": "yourpasswordhere",
   "length": 14,
-  "has_upper": true,
-  "has_lower": true,
-  "has_digit": true,
-  "has_special": true,
+  "character_classes": {
+    "upper": true,
+    "lower": true,
+    "digit": true,
+    "special": true
+  },
   "entropy": 78.45,
   "dictionary_matches": [],
-  "keyboard_pattern": false,
-  "sequential_chars": false,
+  "patterns_detected": [],
   "is_common_password": false,
+  "hibp_check": {
+    "pwned": false,
+    "count": 0
+  },
   "score": 85,
   "strength": "STRONG",
   "suggestions": [],
-  "roast": "🔥 Wow, this password is stronger than my coffee! Keep up the good work! 💪"
+  "roast": "🔥 Wow, this password is stronger than my coffee! Keep up the good work! 💪",
+  "singing_roast": "🎵 Your password's so strong, it sings like a rockstar! 🎵",
+  "recommendations": []
 }
 ```
 
 **Example using curl**:
 ```bash
-curl -X POST http://localhost:5000/analyze \
+curl -X POST http://localhost:5000/api/analyze \
   -H "Content-Type: application/json" \
   -d '{"password": "password123"}'
+```
+
+#### Health Check
+**Endpoint**: `GET /api/health`
+
+**Response**:
+```json
+{
+  "status": "healthy",
+  "service": "Password Roast AI",
+  "version": "2.0.0"
+}
 ```
 
 ## Password Analysis Details
