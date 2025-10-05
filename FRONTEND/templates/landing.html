@@ -23,9 +23,12 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+    .hero-gradient {
+        background: url('/static/images/pc1.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
 
         .feature-card {
             background: rgba(255, 255, 255, 0.05);
@@ -80,13 +83,14 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-gradient pt-24 pb-20 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section class="relative min-h-screen flex items-center justify-center" style="background-image: url('/static/images/pc1.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div class="animate-fade-in">
                 <h1 class="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
                     Get Your Passwords
                     <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
-                        Roasted 🔥
+                        Roasted
                     </span>
                 </h1>
                 <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-4xl mx-auto leading-relaxed">
@@ -94,7 +98,7 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                     <a href="/demo" class="bg-white text-gray-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
-                        🔥 Roast My Password
+                        Roast My Password
                     </a>
                     <a href="#features" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all">
                         Learn More
@@ -102,21 +106,20 @@
                 </div>
                 <div class="flex justify-center items-center space-x-8 text-gray-300">
                     <div class="flex items-center space-x-2">
-                        <span class="text-2xl">⚡</span>
+                        <span class="text-2xl">FLASH</span>
                         <span>Instant Analysis</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <span class="text-2xl">🛡️</span>
+                        <span class="text-2xl">SHIELD</span>
                         <span>100% Secure</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <span class="text-2xl">🌍</span>
+                        <span class="text-2xl">WORLD</span>
                         <span>Multi-Language</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-gray-900 to-transparent"></div>
     </section>
 
     <!-- Stats Section -->
@@ -157,42 +160,42 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="feature-card rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
-                        <span class="text-3xl">🤖</span>
+                        <span class="text-3xl">AI</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">AI-Powered Analysis</h3>
                     <p class="text-gray-300">Advanced machine learning algorithms analyze password strength, patterns, and vulnerabilities with 99.9% accuracy.</p>
                 </div>
                 <div class="feature-card rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
-                        <span class="text-3xl">🔥</span>
+                        <span class="text-3xl">FIRE</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Hilarious Roasts</h3>
                     <p class="text-gray-300">Get entertaining, memorable feedback that makes learning about password security fun and unforgettable.</p>
                 </div>
                 <div class="feature-card rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
-                        <span class="text-3xl">🛡️</span>
+                        <span class="text-3xl">SHIELD</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Enterprise Security</h3>
                     <p class="text-gray-300">Built with enterprise-grade security, supporting multi-language detection and real-time breach checking.</p>
                 </div>
                 <div class="feature-card rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
-                        <span class="text-3xl">⚡</span>
+                        <span class="text-3xl">FLASH</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Instant Results</h3>
                     <p class="text-gray-300">Get comprehensive password analysis in seconds with detailed scoring, entropy calculation, and improvement suggestions.</p>
                 </div>
                 <div class="feature-card rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
-                        <span class="text-3xl">🌍</span>
+                        <span class="text-3xl">WORLD</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Multi-Language Support</h3>
                     <p class="text-gray-300">Detects dictionary words in English, Swahili, Spanish, French, and more for comprehensive global coverage.</p>
                 </div>
                 <div class="feature-card rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
-                        <span class="text-3xl">📊</span>
+                        <span class="text-3xl">CHART</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Detailed Metrics</h3>
                     <p class="text-gray-300">View entropy scores, crack time estimates, character analysis, and breach detection results.</p>
@@ -253,7 +256,7 @@
                 <div class="feature-card rounded-xl p-8">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-xl mr-4">
-                            👩‍💻
+                            SC
                         </div>
                         <div>
                             <div class="font-bold text-white">Sarah Chen</div>
@@ -262,13 +265,13 @@
                     </div>
                     <p class="text-gray-300 italic">"AI Password Roaster helped me identify weak passwords across my entire digital life. The roasts are hilarious and actually make me remember the advice!"</p>
                     <div class="flex text-cyan-400 mt-4">
-                        ⭐⭐⭐⭐⭐
+                        5 STARS
                     </div>
                 </div>
                 <div class="feature-card rounded-xl p-8">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-xl mr-4">
-                            👨‍🎓
+                            MJ
                         </div>
                         <div>
                             <div class="font-bold text-white">Marcus Johnson</div>
@@ -277,13 +280,13 @@
                     </div>
                     <p class="text-gray-300 italic">"As someone who hates boring security lectures, this tool made learning about passwords actually fun. The AI roasts are spot-on!"</p>
                     <div class="flex text-cyan-400 mt-4">
-                        ⭐⭐⭐⭐⭐
+                        5 STARS
                     </div>
                 </div>
                 <div class="feature-card rounded-xl p-8">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full flex items-center justify-center text-xl mr-4">
-                            👩‍🏫
+                            AO
                         </div>
                         <div>
                             <div class="font-bold text-white">Dr. Amara Okafor</div>
@@ -292,7 +295,7 @@
                     </div>
                     <p class="text-gray-300 italic">"The multi-language support is incredible. We use it company-wide and it's helped reduce password-related security incidents by 80%."</p>
                     <div class="flex text-cyan-400 mt-4">
-                        ⭐⭐⭐⭐⭐
+                        5 STARS
                     </div>
                 </div>
             </div>
@@ -304,21 +307,21 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="cta-gradient rounded-2xl p-12 text-white">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                    Ready to Get Roasted? 🔥
+                    Ready to Get Roasted? FIRE
                 </h2>
                 <p class="text-xl mb-8 opacity-90">
                     Enter your password and discover how secure it really is. Get hilarious feedback and expert advice to create unbreakable passwords.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="/demo" class="bg-white text-gray-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
-                        🚀 Start Roasting Now
+                        ROCKET Start Roasting Now
                     </a>
                     <a href="/dashboard" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all">
-                        📊 View Dashboard
+                        CHART View Dashboard
                     </a>
                 </div>
                 <p class="text-sm mt-6 opacity-75">
-                    🔒 Your passwords are analyzed securely and never stored
+                    LOCK Your passwords are analyzed securely and never stored
                 </p>
             </div>
         </div>
@@ -331,7 +334,7 @@
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
                         <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-sm">🔥</span>
+                            <span class="text-white font-bold text-sm">FIRE</span>
                         </div>
                         <span class="text-xl font-bold text-white">AI Password Roaster</span>
                     </div>
@@ -365,7 +368,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 AI Password Roaster. Built with ❤️ for better password security.</p>
+                <p>&copy; 2024 AI Password Roaster. Built with HEART for better password security.</p>
             </div>
         </div>
     </footer>
