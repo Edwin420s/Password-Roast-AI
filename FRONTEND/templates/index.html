@@ -252,7 +252,7 @@
     </style>
 </head>
 <body data-theme="light">
-    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌓</button>
     
     <div class="container">
         <div class="header">
@@ -266,7 +266,7 @@
                 <input type="password" class="password-input" id="passwordInput" 
                        placeholder="Enter your password to get roasted... 🔥" 
                        onkeypress="handleEnterKey(event)">
-                <button class="btn btn-primary" onclick="analyzePassword()">Roast Me! 🔥</button>
+                <button class="btn btn-primary" id="roastButton" onclick="analyzePassword()">Roast Me! 🔥</button>
             </div>
             
             <div class="loading" id="loading">
@@ -316,6 +316,8 @@
         </div>
     </div>
 
+    <script src="/static/js/app.js"></script>
+
     <script>
         let currentTheme = 'light';
 
@@ -345,7 +347,7 @@
             resultSection.style.display = 'none';
 
             try {
-                const response = await fetch('/analyze', {
+                const response = await fetch('/api/analyze', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
