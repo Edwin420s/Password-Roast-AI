@@ -4,6 +4,28 @@
 
 A fun and educational web application that analyzes password strength and roasts weak passwords using AI. Built with Flask backend and simple HTML frontend.
 
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Usage](#api-usage)
+- [Password Analysis Details](#password-analysis-details)
+- [Deployment](#deployment)
+- [Configuration](#configuration)
+- [Security Considerations](#security-considerations)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+- [Support](#support)
+- [Troubleshooting](#troubleshooting)
+- [Future Enhancements](#future-enhancements)
+
 ## Features
 
 - **Comprehensive Password Analysis**: Checks for length, character variety, entropy, dictionary words, keyboard patterns, sequential characters, and common passwords
@@ -26,13 +48,33 @@ A fun and educational web application that analyzes password strength and roasts
 ```
 Password-Roast-AI/
 ├── BACKEND/
-│   └── app.py                 # Main Flask application
+│   ├── app.py                 # Main Flask application and API endpoints
+│   ├── password_analyzer.py   # Password analysis logic
+│   ├── ai_roast_generator.py  # AI roast generation using OpenAI
+│   ├── utils/                 # Helper and security utility modules
+│   └── wordlists/             # Multi-language wordlists for dictionary detection
 ├── FRONTEND/
-│   └── templates/
-│       └── index.html         # Web interface
+│   ├── templates/
+│   │   ├── landing.html       # Landing page
+│   │   ├── demo.html          # Demo page with password input and results
+│   │   └── dashboard.html     # Dashboard page
+│   ├── static/
+│   │   └── js/
+│   │       └── app.js         # Frontend JavaScript logic
+│   └── static/images/         # Images used in frontend
+├── data/
+│   └── common_passwords.txt   # Common leaked passwords list
+├── docs/
+│   └── API.md                 # API documentation
+├── tests/
+│   ├── test_analyzer.py       # Unit tests for password analyzer
+│   └── test_api.py            # API endpoint tests
+├── Dockerfile                 # Docker image build instructions
+├── docker-compose.yml         # Docker Compose configuration
+├── deploy.sh                  # Deployment script using Docker
 ├── requirements.txt           # Python dependencies
-├── .env                       # Environment variables (API keys)
-└── README.md                  # This file
+├── README.md                  # This file
+└── .env                       # Environment variables (not committed)
 ```
 
 ## Installation
