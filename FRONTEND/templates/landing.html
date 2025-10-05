@@ -5,85 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Password Roaster - Get Your Passwords Roasted!</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'cyber-dark': '#0A0F24',
-                        'cyber-blue': '#0078FF',
-                        'cyber-cyan': '#00FFFF',
-                        'cyber-purple': '#8B5CF6',
-                        'cyber-pink': '#EC4899',
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.6s ease-in-out',
-                        'slide-up': 'slideUp 0.6s ease-out',
-                        'bounce-gentle': 'bounceGentle 2s infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        bounceGentle: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)' },
-                            '100%': { boxShadow: '0 0 30px rgba(0, 255, 255, 0.6)' },
-                        },
-                    },
-                }
-            }
-        }
-    </script>
     <style>
-        body {
-            background: linear-gradient(135deg, #0A0F24 0%, #1E293B 50%, #0A0F24 100%);
-            color: #F1F5F9;
-            font-family: 'Inter', sans-serif;
+        :root {
+            --primary: #0078FF;
+            --secondary: #00FFFF;
+            --danger: #EF4444;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --dark: #0A0F24;
+            --light: #0b2947ff;
+            --gray: #040f1fff;
         }
+
+        body {
+            background-color: #0A0F24;
+            color: #F1F5F9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         .hero-gradient {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
         }
-        .hero-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-        }
+
         .feature-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
+
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
+
         .stat-card {
             background: linear-gradient(135deg, rgba(0, 120, 255, 0.1), rgba(0, 255, 255, 0.1));
             border: 1px solid rgba(0, 255, 255, 0.2);
         }
+
         .cta-gradient {
             background: linear-gradient(135deg, #0078FF 0%, #00FFFF 50%, #8B5CF6 100%);
         }
+
         .floating-animation {
             animation: bounce-gentle 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
@@ -93,16 +64,16 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-gradient-to-r from-cyber-blue to-cyber-cyan rounded-lg flex items-center justify-center">
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-sm">🔥</span>
                     </div>
                     <span class="text-xl font-bold text-white">AI Password Roaster</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-gray-300 hover:text-cyber-cyan transition-colors">Features</a>
-                    <a href="#how-it-works" class="text-gray-300 hover:text-cyber-cyan transition-colors">How It Works</a>
-                    <a href="#testimonials" class="text-gray-300 hover:text-cyber-cyan transition-colors">Reviews</a>
-                    <a href="/demo" class="bg-cyber-blue text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-all glow">Get Started</a>
+                    <a href="#features" class="text-gray-300 hover:text-cyan-400 transition-colors">Features</a>
+                    <a href="#how-it-works" class="text-gray-300 hover:text-cyan-400 transition-colors">How It Works</a>
+                    <a href="#testimonials" class="text-gray-300 hover:text-cyan-400 transition-colors">Reviews</a>
+                    <a href="/demo" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all">Get Started</a>
                 </div>
             </div>
         </div>
@@ -114,7 +85,7 @@
             <div class="animate-fade-in">
                 <h1 class="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
                     Get Your Passwords
-                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan to-cyber-pink">
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
                         Roasted 🔥
                     </span>
                 </h1>
@@ -122,10 +93,10 @@
                     Tired of weak passwords? Let our AI analyze, roast, and help you create unbreakable passwords with hilarious feedback and expert security advice.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                    <a href="/demo" class="bg-white text-cyber-dark px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
+                    <a href="/demo" class="bg-white text-gray-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
                         🔥 Roast My Password
                     </a>
-                    <a href="#features" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-cyber-dark transition-all">
+                    <a href="#features" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all">
                         Learn More
                     </a>
                 </div>
@@ -145,27 +116,27 @@
                 </div>
             </div>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-cyber-dark to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-gray-900 to-transparent"></div>
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 bg-cyber-dark">
+    <section class="py-16 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="stat-card rounded-xl p-6 text-center animate-slide-up">
-                    <div class="text-4xl font-bold text-cyber-cyan mb-2">1M+</div>
+                <div class="stat-card rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">1M+</div>
                     <div class="text-gray-300">Passwords Analyzed</div>
                 </div>
-                <div class="stat-card rounded-xl p-6 text-center animate-slide-up" style="animation-delay: 0.1s">
-                    <div class="text-4xl font-bold text-cyber-cyan mb-2">25+</div>
+                <div class="stat-card rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">25+</div>
                     <div class="text-gray-300">Languages Supported</div>
                 </div>
-                <div class="stat-card rounded-xl p-6 text-center animate-slide-up" style="animation-delay: 0.2s">
-                    <div class="text-4xl font-bold text-cyber-cyan mb-2">99.9%</div>
+                <div class="stat-card rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">99.9%</div>
                     <div class="text-gray-300">Accuracy Rate</div>
                 </div>
-                <div class="stat-card rounded-xl p-6 text-center animate-slide-up" style="animation-delay: 0.3s">
-                    <div class="text-4xl font-bold text-cyber-cyan mb-2">24/7</div>
+                <div class="stat-card rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">24/7</div>
                     <div class="text-gray-300">AI Available</div>
                 </div>
             </div>
@@ -177,50 +148,50 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                    Why Choose Password Roast AI?
+                    Why Choose AI Password Roaster?
                 </h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                     Our AI-powered platform combines cutting-edge security analysis with entertaining feedback to make password security fun and effective.
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="feature-card rounded-xl p-8 text-center animate-slide-up">
-                    <div class="w-16 h-16 bg-gradient-to-r from-cyber-blue to-cyber-cyan rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
+                <div class="feature-card rounded-xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
                         <span class="text-3xl">🤖</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">AI-Powered Analysis</h3>
                     <p class="text-gray-300">Advanced machine learning algorithms analyze password strength, patterns, and vulnerabilities with 99.9% accuracy.</p>
                 </div>
-                <div class="feature-card rounded-xl p-8 text-center animate-slide-up" style="animation-delay: 0.1s">
-                    <div class="w-16 h-16 bg-gradient-to-r from-cyber-purple to-cyber-pink rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
+                <div class="feature-card rounded-xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
                         <span class="text-3xl">🔥</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Hilarious Roasts</h3>
                     <p class="text-gray-300">Get entertaining, memorable feedback that makes learning about password security fun and unforgettable.</p>
                 </div>
-                <div class="feature-card rounded-xl p-8 text-center animate-slide-up" style="animation-delay: 0.2s">
-                    <div class="w-16 h-16 bg-gradient-to-r from-cyber-cyan to-cyber-blue rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
+                <div class="feature-card rounded-xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
                         <span class="text-3xl">🛡️</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Enterprise Security</h3>
                     <p class="text-gray-300">Built with enterprise-grade security, supporting multi-language detection and real-time breach checking.</p>
                 </div>
-                <div class="feature-card rounded-xl p-8 text-center animate-slide-up" style="animation-delay: 0.3s">
-                    <div class="w-16 h-16 bg-gradient-to-r from-cyber-pink to-cyber-purple rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
+                <div class="feature-card rounded-xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
                         <span class="text-3xl">⚡</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Instant Results</h3>
                     <p class="text-gray-300">Get comprehensive password analysis in seconds with detailed scoring, entropy calculation, and improvement suggestions.</p>
                 </div>
-                <div class="feature-card rounded-xl p-8 text-center animate-slide-up" style="animation-delay: 0.4s">
-                    <div class="w-16 h-16 bg-gradient-to-r from-cyber-cyan to-cyber-purple rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
+                <div class="feature-card rounded-xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
                         <span class="text-3xl">🌍</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Multi-Language Support</h3>
                     <p class="text-gray-300">Detects dictionary words in English, Swahili, Spanish, French, and more for comprehensive global coverage.</p>
                 </div>
-                <div class="feature-card rounded-xl p-8 text-center animate-slide-up" style="animation-delay: 0.5s">
-                    <div class="w-16 h-16 bg-gradient-to-r from-cyber-blue to-cyber-pink rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
+                <div class="feature-card rounded-xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 floating-animation">
                         <span class="text-3xl">📊</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Detailed Metrics</h3>
@@ -231,7 +202,7 @@
     </section>
 
     <!-- How It Works Section -->
-    <section id="how-it-works" class="py-20 bg-cyber-dark">
+    <section id="how-it-works" class="py-20 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -242,22 +213,22 @@
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center animate-slide-up">
-                    <div class="w-20 h-20 bg-gradient-to-r from-cyber-blue to-cyber-cyan rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-white">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-white">
                         1
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Enter Password</h3>
                     <p class="text-gray-300">Type or paste your password into our secure analyzer. Your input is never stored or shared.</p>
                 </div>
-                <div class="text-center animate-slide-up" style="animation-delay: 0.2s">
-                    <div class="w-20 h-20 bg-gradient-to-r from-cyber-purple to-cyber-pink rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-white">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-white">
                         2
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">AI Analysis</h3>
                     <p class="text-gray-300">Our AI analyzes strength, detects patterns, checks breaches, and generates a personalized roast.</p>
                 </div>
-                <div class="text-center animate-slide-up" style="animation-delay: 0.4s">
-                    <div class="w-20 h-20 bg-gradient-to-r from-cyber-cyan to-cyber-purple rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-white">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-white">
                         3
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Get Results</h3>
@@ -279,9 +250,9 @@
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="feature-card rounded-xl p-8 animate-slide-up">
+                <div class="feature-card rounded-xl p-8">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-cyber-blue to-cyber-cyan rounded-full flex items-center justify-center text-xl mr-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-xl mr-4">
                             👩‍💻
                         </div>
                         <div>
@@ -289,14 +260,14 @@
                             <div class="text-gray-400">Cybersecurity Analyst</div>
                         </div>
                     </div>
-                    <p class="text-gray-300 italic">"Password Roast AI helped me identify weak passwords across my entire digital life. The roasts are hilarious and actually make me remember the advice!"</p>
-                    <div class="flex text-cyber-cyan mt-4">
+                    <p class="text-gray-300 italic">"AI Password Roaster helped me identify weak passwords across my entire digital life. The roasts are hilarious and actually make me remember the advice!"</p>
+                    <div class="flex text-cyan-400 mt-4">
                         ⭐⭐⭐⭐⭐
                     </div>
                 </div>
-                <div class="feature-card rounded-xl p-8 animate-slide-up" style="animation-delay: 0.1s">
+                <div class="feature-card rounded-xl p-8">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-cyber-purple to-cyber-pink rounded-full flex items-center justify-center text-xl mr-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-xl mr-4">
                             👨‍🎓
                         </div>
                         <div>
@@ -305,13 +276,13 @@
                         </div>
                     </div>
                     <p class="text-gray-300 italic">"As someone who hates boring security lectures, this tool made learning about passwords actually fun. The AI roasts are spot-on!"</p>
-                    <div class="flex text-cyber-cyan mt-4">
+                    <div class="flex text-cyan-400 mt-4">
                         ⭐⭐⭐⭐⭐
                     </div>
                 </div>
-                <div class="feature-card rounded-xl p-8 animate-slide-up" style="animation-delay: 0.2s">
+                <div class="feature-card rounded-xl p-8">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-cyber-cyan to-cyber-purple rounded-full flex items-center justify-center text-xl mr-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full flex items-center justify-center text-xl mr-4">
                             👩‍🏫
                         </div>
                         <div>
@@ -320,7 +291,7 @@
                         </div>
                     </div>
                     <p class="text-gray-300 italic">"The multi-language support is incredible. We use it company-wide and it's helped reduce password-related security incidents by 80%."</p>
-                    <div class="flex text-cyber-cyan mt-4">
+                    <div class="flex text-cyan-400 mt-4">
                         ⭐⭐⭐⭐⭐
                     </div>
                 </div>
@@ -331,7 +302,7 @@
     <!-- CTA Section -->
     <section class="py-20">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="cta-gradient rounded-2xl p-12 text-white animate-slide-up">
+            <div class="cta-gradient rounded-2xl p-12 text-white">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6">
                     Ready to Get Roasted? 🔥
                 </h2>
@@ -339,10 +310,10 @@
                     Enter your password and discover how secure it really is. Get hilarious feedback and expert advice to create unbreakable passwords.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/demo" class="bg-white text-cyber-dark px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
+                    <a href="/demo" class="bg-white text-gray-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
                         🚀 Start Roasting Now
                     </a>
-                    <a href="/dashboard" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-cyber-dark transition-all">
+                    <a href="/dashboard" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all">
                         📊 View Dashboard
                     </a>
                 </div>
@@ -354,47 +325,47 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-cyber-dark py-12 border-t border-white/10">
+    <footer class="bg-gray-900 py-12 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-r from-cyber-blue to-cyber-cyan rounded-lg flex items-center justify-center">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
                             <span class="text-white font-bold text-sm">🔥</span>
                         </div>
-                        <span class="text-xl font-bold text-white">Password Roast AI</span>
+                        <span class="text-xl font-bold text-white">AI Password Roaster</span>
                     </div>
                     <p class="text-gray-400">Making password security fun and effective with AI-powered analysis and hilarious roasts.</p>
                 </div>
                 <div>
                     <h4 class="font-semibold text-white mb-4">Product</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#features" class="hover:text-cyber-cyan transition-colors">Features</a></li>
-                        <li><a href="#how-it-works" class="hover:text-cyber-cyan transition-colors">How It Works</a></li>
-                        <li><a href="/demo" class="hover:text-cyber-cyan transition-colors">Demo</a></li>
-                        <li><a href="/docs/API.md" class="hover:text-cyber-cyan transition-colors">API Docs</a></li>
+                        <li><a href="#features" class="hover:text-cyan-400 transition-colors">Features</a></li>
+                        <li><a href="#how-it-works" class="hover:text-cyan-400 transition-colors">How It Works</a></li>
+                        <li><a href="/demo" class="hover:text-cyan-400 transition-colors">Demo</a></li>
+                        <li><a href="/docs/API.md" class="hover:text-cyan-400 transition-colors">API Docs</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold text-white mb-4">Company</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-cyber-cyan transition-colors">About</a></li>
-                        <li><a href="#" class="hover:text-cyber-cyan transition-colors">Blog</a></li>
-                        <li><a href="#" class="hover:text-cyber-cyan transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-cyber-cyan transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold text-white mb-4">Legal</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-cyber-cyan transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-cyber-cyan transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-cyber-cyan transition-colors">Security</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Security</a></li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 Password Roast AI. Built with ❤️ for better password security.</p>
+                <p>&copy; 2024 AI Password Roaster. Built with ❤️ for better password security.</p>
             </div>
         </div>
     </footer>
