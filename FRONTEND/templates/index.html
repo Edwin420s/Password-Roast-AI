@@ -87,6 +87,7 @@
             display: flex;
             gap: 1rem;
             margin-bottom: 1rem;
+            align-items: center;
         }
 
         .password-input {
@@ -98,6 +99,21 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             transition: all 0.3s ease;
+        }
+
+        .toggle-password {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-password:hover {
+            background: #1f9a8e;
         }
 
         .password-input:focus {
@@ -263,10 +279,10 @@
 
         <div class="card">
             <div class="input-group">
-                <input type="password" class="password-input" id="passwordInput" 
-                       placeholder="Enter your password to get roasted... 🔥" 
-                       onkeypress="handleEnterKey(event)">
-                <button class="btn btn-primary" id="roastButton" onclick="analyzePassword()">Roast Me! 🔥</button>
+                <input type="password" class="password-input" id="passwordInput"
+                       placeholder="Enter your password to get roasted... 🔥">
+                <button class="toggle-password" id="togglePassword" title="Toggle password visibility">👁️</button>
+                <button class="btn btn-primary" id="roastButton">Roast Me! 🔥</button>
             </div>
             
             <div class="loading" id="loading">
