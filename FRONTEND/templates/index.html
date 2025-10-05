@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Roast AI 🔥</title>
+    <style>
+        :root {
+            --primary: #ff6b35;
+            --secondary: #2ec4b6;
+            --danger: #e71d36;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --dark: #2d3047;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1b23;
+            --bg-secondary: #2d3047;
+            --text-primary: #f8f9fa;
+            --text-secondary: #adb5bd;
+            --card-bg: #2d3047;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #2d3047;
+            --text-secondary: #6c757d;
+            --card-bg: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .password-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--gray);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .strength-meter {
+            height: 10px;
+            background: var(--gray);
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            width: 0%;
+        }
+
+        .weak { background: var(--danger); width: 33%; }
+        .fair { background: var(--warning); width: 66%; }
+        .strong { background: var(--success); width: 100%; }
+
+        .result-section {
+            display: none;
+        }
+
+        .roast-box {
+            background: linear-gradient(135deg, #ff6b35, #e55a2b);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .detail-card {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .detail-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .suggestions {
+            background: var(--warning);
+            color: var(--dark);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .suggestions ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .suggestions li {
+            margin: 0.5rem 0;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .spinner {
+            border: 4px solid var(--gray);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">🔥</div>
+            <h1>Password Roast AI</h1>
+            <p class="subtitle">We roast weak passwords so you don't get burned!</p>
+        </div>
+
+        <div class="card">
+            <div class="input-group">
+                <input type="password" class="password-input" id="passwordInput" 
+                       placeholder="Enter your password to get roasted... 🔥" 
+                       onkeypress="handleEnterKey(event)">
+                <button class="btn btn-primary" onclick="analyzePassword()">Roast Me! 🔥</button>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing your password... 🕵️</p>
+            </div>
+
+            <div class="strength-meter">
+                <div class="strength-fill" id="strengthFill"></div>
+            </div>
+        </div>
+
+        <div class="result-section" id="resultSection">
+            <div class="card">
+                <div class="roast-box" id="roastText">
+                    Your roast will appear here...
+                </div>
+                
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <div>Strength</div>
+                        <div class="detail-value" id="strengthValue">-</div>
+                    </div>
+                    <div class="detail-card">
+                        <div>Score</div>
+                        <div class="detail-value" id="scoreValue">-</div>
+                    </div>
+                    <div class="detail-card">
+                        <div>Length</div>
+                        <div class="detail-value" id="lengthValue">-</div>
+                    </div>
+                    <div class="detail-card">
+                        <div>Entropy</div>
+                        <div class="detail-value" id="entropyValue">-</div>
+                    </div>
+                </div>
+
+                <div class="suggestions" id="suggestionsBox">
+                    <h3>💡 Suggestions for Improvement</h3>
+                    <ul id="suggestionsList"></ul>
+                </div>
+
+                <div id="weaknessDetails">
+                    <!-- Dynamic weakness details will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTheme = 'light';
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', currentTheme);
+        }
+
+        function handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                analyzePassword();
+            }
+        }
+
+        async function analyzePassword() {
+            const password = document.getElementById('passwordInput').value;
+            const loading = document.getElementById('loading');
+            const resultSection = document.getElementById('resultSection');
+
+            if (!password) {
+                alert('Please enter a password to roast! 🔥');
+                return;
+            }
+
+            // Show loading
+            loading.style.display = 'block';
+            resultSection.style.display = 'none';
+
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ password: password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayResults(data);
+                } else {
+                    throw new Error(data.error || 'Analysis failed');
+                }
+            } catch (error) {
+                alert('Error analyzing password: ' + error.message);
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function displayResults(data) {
+            // Update strength meter
+            const strengthFill = document.getElementById('strengthFill');
+            strengthFill.className = 'strength-fill ' + data.strength.toLowerCase();
+            
+            // Update basic info
+            document.getElementById('strengthValue').textContent = data.strength;
+            document.getElementById('scoreValue').textContent = data.score + '/100';
+            document.getElementById('lengthValue').textContent = data.length;
+            document.getElementById('entropyValue').textContent = data.entropy;
+            
+            // Update roast
+            document.getElementById('roastText').textContent = data.roast;
+            
+            // Update suggestions
+            const suggestionsList = document.getElementById('suggestionsList');
+            suggestionsList.innerHTML = '';
+            data.suggestions.forEach(suggestion => {
+                const li = document.createElement('li');
+                li.textContent = suggestion;
+                suggestionsList.appendChild(li);
+            });
+
+            // Show weakness details
+            const weaknessDetails = document.getElementById('weaknessDetails');
+            weaknessDetails.innerHTML = '';
+
+            if (data.dictionary_matches && data.dictionary_matches.length > 0) {
+                const weaknessCard = document.createElement('div');
+                weaknessCard.className = 'card';
+                weaknessCard.innerHTML = `
+                    <h3>🚨 Dictionary Words Found</h3>
+                    <p>We found these dictionary words in your password:</p>
+                    <ul>
+                        ${data.dictionary_matches.map(match => 
+                            `<li>"${match.word}" (${match.language}${match.type === 'fuzzy' ? ' - similar to ' + match.dict_word : ''})</li>`
+                        ).join('')}
+                    </ul>
+                `;
+                weaknessDetails.appendChild(weaknessCard);
+            }
+
+            if (data.keyboard_pattern) {
+                const weaknessCard = document.createElement('div');
+                weaknessCard.className = 'card';
+                weaknessCard.innerHTML = `
+                    <h3>⌨️ Keyboard Pattern Detected</h3>
+                    <p>Your password follows common keyboard sequences that are easy to guess.</p>
+                `;
+                weaknessDetails.appendChild(weaknessCard);
+            }
+
+            if (data.is_common_password) {
+                const weaknessCard = document.createElement('div');
+                weaknessCard.className = 'card';
+                weaknessCard.innerHTML = `
+                    <h3>📊 Common Password</h3>
+                    <p>This password is frequently used and easily guessable by attackers.</p>
+                `;
+                weaknessDetails.appendChild(weaknessCard);
+            }
+
+            // Show results
+            document.getElementById('resultSection').style.display = 'block';
+        }
+
+        // Initialize with example
+        document.getElementById('passwordInput').value = 'password123';
+    </script>
+</body>
+</html>
