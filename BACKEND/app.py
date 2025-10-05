@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
+from werkzeug.exceptions import BadRequest
 from password_analyzer import AdvancedPasswordAnalyzer
 from ai_roast_generator import AIRoastGenerator
 import os
@@ -26,7 +27,7 @@ def analyze_password():
     try:
         data = request.get_json()
         password = data.get('password', '').strip()
-        
+
         if not password:
             return jsonify({
                 'error': 'No password provided',
@@ -34,21 +35,28 @@ def analyze_password():
                 'strength': 'VERY_WEAK',
                 'suggestions': ['Please enter a password to analyze']
             }), 400
-        
+
         # Perform comprehensive analysis
         analysis = analyzer.comprehensive_analysis(password)
-        
+
         # Generate AI roast
         analysis['roast'] = roast_generator.generate_ai_roast(analysis)
-        
+
         # Add singing roast for fun
         analysis['singing_roast'] = roast_generator.generate_singing_roast(analysis)
-        
+
         # Add security recommendations
         analysis['recommendations'] = generate_security_recommendations(analysis)
-        
+
         return jsonify(analysis)
-        
+
+    except BadRequest:
+        return jsonify({
+            'error': 'Invalid JSON format',
+            'score': 0,
+            'strength': 'VERY_WEAK',
+            'suggestions': ['Please send valid JSON data']
+        }), 400
     except Exception as e:
         return jsonify({
             'error': f'Analysis failed: {str(e)}',

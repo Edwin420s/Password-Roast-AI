@@ -80,10 +80,10 @@ class AdvancedPasswordAnalyzer:
         return list(set(variations))
     
     def calculate_advanced_entropy(self, password: str) -> float:
-        """Calculate password entropy considering character classes"""
+        """Calculate password entropy considering character classes and repetition"""
         if len(password) <= 1:
             return 0
-        
+
         # Character class detection
         classes_present = {
             'lower': any(c.islower() for c in password),
@@ -91,20 +91,29 @@ class AdvancedPasswordAnalyzer:
             'digit': any(c.isdigit() for c in password),
             'special': any(not c.isalnum() for c in password)
         }
-        
+
         # Effective alphabet size based on classes used
         alphabet_size = 0
         if classes_present['lower']: alphabet_size += 26
         if classes_present['upper']: alphabet_size += 26
         if classes_present['digit']: alphabet_size += 10
         if classes_present['special']: alphabet_size += 32  # Common special chars
-        
+
         if alphabet_size == 0:
             return 0
-        
-        # Calculate entropy
+
+        # Base entropy
         entropy = len(password) * math.log2(alphabet_size)
-        return min(entropy, 100)  # Cap at 100 for scoring
+
+        # Penalty for repetition
+        char_counts = Counter(password)
+        max_count = max(char_counts.values())
+        repetition_ratio = max_count / len(password)
+        repetition_penalty = repetition_ratio * 0.7  # Reduce entropy for repetition
+
+        entropy *= (1 - repetition_penalty)
+
+        return min(max(entropy, 0), 100)  # Cap at 100, min 0
     
     def find_dictionary_matches(self, password: str) -> List[Dict]:
         """Advanced dictionary matching with fuzzy search"""
@@ -285,45 +294,45 @@ class AdvancedPasswordAnalyzer:
             'crack_time_estimate': self._estimate_crack_time(score, length)
         }
     
-    def _calculate_score(self, length: int, entropy: float, dictionary_matches: List, 
-                        patterns: List, has_upper: bool, has_lower: bool, 
-                        has_digit: bool, has_special: bool, is_common: bool, 
+    def _calculate_score(self, length: int, entropy: float, dictionary_matches: List,
+                        patterns: List, has_upper: bool, has_lower: bool,
+                        has_digit: bool, has_special: bool, is_common: bool,
                         hibp_result: Dict) -> float:
         """Calculate comprehensive password score (0-100)"""
         base_score = 0
-        
-        # Length score (max 30)
-        base_score += min(length * 2, 30)
-        
+
+        # Length score (max 40)
+        base_score += min(length * 2.5, 40)
+
         # Character variety score (max 20)
         char_types = sum([has_upper, has_lower, has_digit, has_special])
         base_score += char_types * 5
-        
-        # Entropy score (max 20)
-        base_score += min(entropy / 5, 20)
-        
+
+        # Entropy score (max 25)
+        base_score += min(entropy / 4, 25)
+
         # Penalties
         penalties = 0
-        
+
         # Dictionary matches penalty
         if dictionary_matches:
             penalties += len(dictionary_matches) * 10
-        
+
         # Pattern penalties
         for pattern in patterns:
             if pattern['severity'] == 'high':
                 penalties += 20
             else:
                 penalties += 10
-        
+
         # Common password penalty
         if is_common:
             penalties += 30
-        
+
         # HIBP penalty
         if hibp_result.get('pwned', False):
             penalties += 25 + min(hibp_result.get('count', 0) / 1000, 20)
-        
+
         final_score = max(0, base_score - penalties)
         return min(final_score, 100)
     
