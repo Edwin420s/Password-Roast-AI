@@ -1,5 +1,7 @@
 # Password Roast AI
 
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/Edwin420s/Password-Roast-AI)
+
 A fun and educational web application that analyzes password strength and roasts weak passwords using AI. Built with Flask backend and simple HTML frontend.
 
 ## Features
@@ -44,8 +46,8 @@ Password-Roast-AI/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/password-roast-ai.git
-   cd password-roast-ai
+   git clone https://github.com/Edwin420s/Password-Roast-AI.git
+   cd Password-Roast-AI
    ```
 
 2. **Create virtual environment** (recommended):
