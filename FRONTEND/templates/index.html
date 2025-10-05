@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Password Roast AI - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-dark': '#0A0F24',
+                        'cyber-blue': '#0078FF',
+                        'cyber-cyan': '#00FFFF',
+                        'cyber-purple': '#8B5CF6',
+                        'cyber-pink': '#EC4899',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)' },
+                            '100%': { boxShadow: '0 0 30px rgba(0, 255, 255, 0.6)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0A0F24 0%, #1E293B 50%, #0A0F24 100%);
+            color: #F1F5F9;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        .strength-fill {
+            transition: width 0.5s ease;
+        }
+        .strength-fill.very_weak {
+            background-color: #ef4444; /* red */
+            width: 20%;
+        }
+        .strength-fill.weak {
+            background-color: #fbbf24; /* yellow */
+            width: 40%;
+        }
+        .strength-fill.fair {
+            background-color: #facc15; /* amber */
+            width: 60%;
+        }
+        .strength-fill.strong {
+            background-color: #22c55e; /* green */
+            width: 80%;
+        }
+        .strength-fill.very_strong {
+            background-color: #14b8a6; /* teal */
+            width: 100%;
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out forwards;
+        }
+        .slide-up {
+            animation: slideUp 0.6s ease-out forwards;
+        }
+        .btn-primary {
+            background-color: #0078FF;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #005bb5;
+        }
+        .input-password {
+            background-color: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #F1F5F9;
+            width: 100%;
+            font-size: 1.125rem;
+        }
+        .input-password:focus {
+            outline: none;
+            border-color: #00FFFF;
+            box-shadow: 0 0 8px #00FFFF;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .result-section {
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        .roast-box {
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 1rem;
+            background: linear-gradient(135deg, #0078FF, #00FFFF);
+            border-radius: 0.75rem;
+            color: white;
+            margin-bottom: 1rem;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .detail-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .detail-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #a5b4fc;
+        }
+        .detail-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .suggestions {
+            background: #fbbf24;
+            color: #1e293b;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        .suggestions ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .suggestions li {
+            margin-bottom: 0.25rem;
+        }
+        .weakness-section {
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+        .weakness-section h4 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ec4899;
+        }
+        .weakness-section ul {
+            list-style-type: circle;
+            padding-left: 1.5rem;
+        }
+        .weakness-section li {
+            margin-bottom: 0.25rem;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .spinner {
+            border: 4px solid #334155;
+            border-top: 4px solid #00FFFF;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #0078FF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 0 10px #00FFFF;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+        .theme-toggle:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    <div class="container">
+        <header class="mb-8 text-center">
+            <h1 class="text-5xl font-extrabold mb-2">🔥 Password Roast AI</h1>
+            <p class="text-lg text-gray-300 max-w-xl mx-auto">We roast weak passwords so you don't get burned! Enter your password below to get started.</p>
+        </header>
+        <section>
+            <div class="flex gap-4">
+                <input type="password" id="passwordInput" class="input-password" placeholder="Enter your password to get roasted... 🔥" aria-label="Password input" />
+                <button id="togglePassword" class="btn-primary" aria-label="Toggle password visibility">👁️</button>
+                <button id="roastButton" class="btn-primary">Roast Me! 🔥</button>
+            </div>
+            <div class="loading" id="loading" role="status" aria-live="polite" aria-busy="true">
+                <div class="spinner"></div>
+                <p>Analyzing your password... 🕵️</p>
+            </div>
+            <div class="strength-meter mt-4 h-4 rounded-full bg-gray-700 overflow-hidden">
+                <div id="strengthFill" class="strength-fill"></div>
+            </div>
+        </section>
+        <section id="resultSection" class="result-section hidden" aria-live="polite">
+            <div class="roast-box" id="roastText" aria-label="Password roast">
+                Your roast will appear here...
+            </div>
+            <div class="details-grid" role="list">
+                <div class="detail-card" role="listitem">
+                    <div class="detail-title">Strength</div>
+                    <div class="detail-value" id="strengthValue">-</div>
+                </div>
+                <div class="detail-card" role="listitem">
+                    <div class="detail-title">Score</div>
+                    <div class="detail-value" id="scoreValue">-</div>
+                </div>
+                <div class="detail-card" role="listitem">
+                    <div class="detail-title">Length</div>
+                    <div class="detail-value" id="lengthValue">-</div>
+                </div>
+                <div class="detail-card" role="listitem">
+                    <div class="detail-title">Entropy</div>
+                    <div class="detail-value" id="entropyValue">-</div>
+                </div>
+                <div class="detail-card" role="listitem">
+                    <div class="detail-title">Crack Time</div>
+                    <div class="detail-value" id="crackTime">-</div>
+                </div>
+            </div>
+            <div class="suggestions" id="suggestionsBox" aria-label="Suggestions for improvement">
+                <h3>💡 Suggestions for Improvement</h3>
+                <ul id="suggestionsList"></ul>
+            </div>
+            <div id="weaknessDetails" class="weakness-section" aria-label="Detected weaknesses">
+                <!-- Dynamic weakness details will be inserted here -->
+            </div>
+        </section>
+    </div>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
