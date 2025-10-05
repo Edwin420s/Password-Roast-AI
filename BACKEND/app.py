@@ -20,7 +20,15 @@ roast_generator = AIRoastGenerator()
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('landing.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/demo')
+def demo():
+    return render_template('demo.html')
 
 @app.route('/api/analyze', methods=['POST'])
 def analyze_password():
