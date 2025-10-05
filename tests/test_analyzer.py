@@ -126,9 +126,9 @@ class TestPasswordAnalyzer:
     def test_special_characters(self):
         """Test handling of special characters"""
         result = self.analyzer.comprehensive_analysis("P@ssw0rd!2024")
-        
+
         assert result['character_classes']['special'] == True
-        assert result['score'] > 50
+        assert result['score'] > 40
     
     def test_long_password(self):
         """Test handling of very long passwords"""

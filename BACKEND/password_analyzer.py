@@ -316,7 +316,7 @@ class AdvancedPasswordAnalyzer:
 
         # Dictionary matches penalty
         if dictionary_matches:
-            penalties += len(dictionary_matches) * 10
+            penalties += len(dictionary_matches) * 5
 
         # Pattern penalties
         for pattern in patterns:
