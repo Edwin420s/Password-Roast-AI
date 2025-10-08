@@ -58,23 +58,34 @@
         .header {
             text-align: center;
             margin-bottom: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 15px;
         }
 
         .logo {
             font-size: 3rem;
             margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 200px;
+            height: auto;
         }
 
         h1 {
-            color: var(--primary);
+            color: white;
             margin-bottom: 0.5rem;
             font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
 
         .subtitle {
-            color: var(--text-secondary);
+            color: white;
             font-size: 1.2rem;
             margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
 
         .card {
@@ -109,9 +120,9 @@
             color: white;
             border: none;
             border-radius: 10px;
-            padding: 1rem;
+            padding: 0.5rem 1rem;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
 
@@ -275,7 +286,9 @@
     
     <div class="container">
         <div class="header">
-            <div class="logo"></div>
+            <div class="logo">
+                <img src="/static/images/pc2.jpeg" alt="Password Roast AI Logo">
+            </div>
             <h1>Password Roast AI</h1>
             <p class="subtitle">We roast weak passwords so you don't get burned!</p>
         </div>
@@ -284,7 +297,7 @@
             <div class="input-group">
                 <input type="password" class="password-input" id="passwordInput"
                        placeholder="Enter your password to get roasted...">
-                <button class="toggle-password" id="togglePassword" title="Toggle password visibility">Show</button>
+                <button class="toggle-password" id="togglePassword" title="Toggle password visibility">Toggle</button>
                 <button class="btn btn-primary" id="roastButton">Roast Me!</button>
             </div>
             
