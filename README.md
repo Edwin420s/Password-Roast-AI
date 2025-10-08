@@ -26,20 +26,27 @@ A fun and educational web application that analyzes password strength and roasts
 
 ## Features
 
-- **Comprehensive Password Analysis**: Checks for length, character variety, entropy, dictionary words, keyboard patterns, sequential characters, and common passwords
-- **Multi-language Dictionary Detection**: Supports English, Swahili, Spanish, and French word detection
+- **Comprehensive Password Analysis**: Checks for length, character variety, entropy, dictionary words, keyboard patterns, sequential characters, common passwords, and data breaches
+- **Multi-language Dictionary Detection**: Supports English, Swahili, Spanish, and French word detection with fuzzy matching
 - **AI-Powered Roasts**: Uses OpenAI GPT-3.5-turbo to generate humorous but helpful password critiques
+- **Singing Roasts**: AI-generated password critiques in song/rap format
+- **Have I Been Pwned Integration**: Checks passwords against known data breaches
 - **Real-time Feedback**: Instant analysis and scoring (0-100 scale)
 - **Educational Suggestions**: Provides actionable advice for improving password strength
+- **Security Recommendations**: Priority-based recommendations for password improvement
 - **CORS Enabled**: Supports cross-origin requests for API integration
+- **Theme Support**: Light/dark theme toggle
+- **Responsive Design**: Works on desktop and mobile devices
 
 ## Technologies Used
 
-- **Backend**: Python Flask
+- **Backend**: Python Flask, Flask-CORS
 - **AI Integration**: OpenAI API
 - **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
-- **Password Analysis**: Custom algorithms for entropy calculation, pattern detection, and fuzzy matching
-- **Deployment**: Ready for Heroku/Gunicorn deployment
+- **Password Analysis**: Custom algorithms for entropy calculation, pattern detection, fuzzy matching, and breach checking
+- **Security**: bcrypt, cryptography for secure operations
+- **Deployment**: Docker, Docker Compose, Gunicorn
+- **Development**: pytest, black, flake8
 
 ## Project Structure
 
@@ -47,31 +54,42 @@ A fun and educational web application that analyzes password strength and roasts
 Password-Roast-AI/
 ├── BACKEND/
 │   ├── app.py                 # Main Flask application and API endpoints
-│   ├── password_analyzer.py   # Password analysis logic
+│   ├── password_analyzer.py   # Advanced password analysis logic
 │   ├── ai_roast_generator.py  # AI roast generation using OpenAI
-│   ├── utils/                 # Helper and security utility modules
+│   ├── config.py              # Application configuration
+│   └── utils/
+│       ├── helpers.py         # Utility functions and helpers
+│       └── security.py        # Security-related utilities
 │   └── wordlists/             # Multi-language wordlists for dictionary detection
+│       ├── english.txt
+│       ├── swahili.txt
+│       ├── spanish.txt
+│       └── french.txt
 ├── FRONTEND/
 │   ├── templates/
 │   │   ├── landing.html       # Landing page
 │   │   ├── demo.html          # Demo page with password input and results
-│   │   └── dashboard.html     # Dashboard page
+│   │   ├── dashboard.html     # Dashboard page
+│   │   └── index.html         # Main template
 │   ├── static/
-│   │   └── js/
-│   │       └── app.js         # Frontend JavaScript logic
-│   └── static/images/         # Images used in frontend
+│   │   ├── js/
+│   │   │   └── app.js         # Frontend JavaScript logic
+│   │   └── images/            # Images used in frontend
+│   └── pics/                  # Additional images
 ├── data/
 │   └── common_passwords.txt   # Common leaked passwords list
 ├── docs/
 │   └── API.md                 # API documentation
 ├── tests/
 │   ├── test_analyzer.py       # Unit tests for password analyzer
-│   └── test_api.py            # API endpoint tests
+│   ├── test_api.py            # API endpoint tests
+│   └── init.py                # Test initialization
 ├── Dockerfile                 # Docker image build instructions
 ├── docker-compose.yml         # Docker Compose configuration
 ├── deploy.sh                  # Deployment script using Docker
 ├── requirements.txt           # Python dependencies
 ├── README.md                  # This file
+├── TODO.md                    # Development tasks
 └── .env                       # Environment variables (not committed)
 ```
 
@@ -105,6 +123,9 @@ Password-Roast-AI/
    Create a `.env` file in the root directory:
    ```
    OPENAI_API_KEY=your_openai_api_key_here
+   FLASK_DEBUG=False
+   PORT=5000
+   HOST=0.0.0.0
    ```
 
 ## Usage
@@ -121,7 +142,7 @@ Password-Roast-AI/
    http://localhost:5000
    ```
 
-3. **Enter a password** in the input field and click "Roast My Password!"
+3. **Enter a password** in the input field and click "Roast My Password!"**
 
 ### API Usage
 
@@ -149,8 +170,23 @@ The application provides a REST API for programmatic access:
     "special": true
   },
   "entropy": 78.45,
-  "dictionary_matches": [],
-  "patterns_detected": [],
+  "dictionary_matches": [
+    {
+      "language": "english",
+      "matched_word": "password",
+      "variant": "yourpasswordhere",
+      "type": "exact",
+      "similarity": null,
+      "position": 4
+    }
+  ],
+  "patterns_detected": [
+    {
+      "type": "keyboard_pattern",
+      "pattern": "qwerty",
+      "severity": "high"
+    }
+  ],
   "is_common_password": false,
   "hibp_check": {
     "pwned": false,
@@ -158,10 +194,21 @@ The application provides a REST API for programmatic access:
   },
   "score": 85,
   "strength": "STRONG",
-  "suggestions": [],
-  "roast": "🔥 Wow, this password is stronger than my coffee! Keep up the good work! 💪",
-  "singing_roast": "🎵 Your password's so strong, it sings like a rockstar! 🎵",
-  "recommendations": []
+  "suggestions": [
+    "Use at least 12 characters for better security",
+    "Avoid dictionary words from any language"
+  ],
+  "roast": "Your password is trying its best, but it's still snack food for hackers!",
+  "singing_roast": "Your password's so weak... it made the mic drop!",
+  "recommendations": [
+    {
+      "priority": "high",
+      "title": "Change This Password Immediately",
+      "description": "This password is not secure enough for important accounts",
+      "action": "Generate a new, stronger password"
+    }
+  ],
+  "crack_time_estimate": "Years"
 }
 ```
 
@@ -187,9 +234,11 @@ curl -X POST http://localhost:5000/api/analyze \
 ## Password Analysis Details
 
 ### Strength Scoring
-- **0-39**: WEAK
-- **40-69**: FAIR
-- **70-100**: STRONG
+- **0-19**: VERY_WEAK
+- **20-39**: WEAK
+- **40-59**: FAIR
+- **60-79**: STRONG
+- **80-100**: VERY_STRONG
 
 ### Analysis Components
 
@@ -198,11 +247,13 @@ curl -X POST http://localhost:5000/api/analyze \
    - Character variety (uppercase, lowercase, digits, special characters)
 
 2. **Advanced Analysis**:
-   - Shannon entropy calculation
+   - Shannon entropy calculation with repetition penalties
    - Dictionary word detection (exact and fuzzy matching)
    - Keyboard pattern detection (qwerty, asdf, etc.)
    - Sequential character detection (1234, abcd, etc.)
-   - Common password checking
+   - Common password checking against leaked lists
+   - Have I Been Pwned breach checking
+   - Leetspeak deobfuscation
 
 3. **Multi-language Support**:
    - English
@@ -215,7 +266,9 @@ curl -X POST http://localhost:5000/api/analyze \
 The AI roast feature uses GPT-3.5-turbo to create humorous critiques that are:
 - Educational: Explain why the password is weak
 - Actionable: Suggest specific improvements
-- Entertaining: Use emojis and fun language
+- Entertaining: Use creative analogies and humor
+
+Includes both regular roasts and singing roasts in various formats.
 
 ## Deployment
 
@@ -223,6 +276,65 @@ The AI roast feature uses GPT-3.5-turbo to create humorous critiques that are:
 ```bash
 python BACKEND/app.py
 ```
+
+### Docker Deployment
+
+The project includes a production-ready Dockerfile:
+
+```dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy dependencies and install
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Create logs directory
+RUN mkdir -p logs data
+
+# Create non-root user
+RUN useradd --create-home --shell /bin/bash app
+RUN chown -R app:app /app
+USER app
+
+# Expose port
+EXPOSE 5000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:5000/api/health || exit 1
+
+# Run application
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "BACKEND.app:app"]
+```
+
+Build and run:
+```bash
+docker build -t password-roast-ai .
+docker run -p 5000:5000 --env-file .env password-roast-ai
+```
+
+### Using Docker Compose
+
+1. **Start services**:
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Stop services**:
+   ```bash
+   docker-compose down
+   ```
 
 ### Production (Heroku Example)
 
@@ -243,50 +355,46 @@ python BACKEND/app.py
    git push heroku main
    ```
 
-### Docker Deployment
-
-Create a `Dockerfile`:
-```dockerfile
-FROM python:3.9-slim
-
-WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY . .
-
-EXPOSE 5000
-
-CMD ["python", "BACKEND/app.py"]
-```
-
-Build and run:
-```bash
-docker build -t password-roast-ai .
-docker run -p 5000:5000 password-roast-ai
-```
-
 ## Configuration
 
 ### Environment Variables
 
 - `OPENAI_API_KEY`: Your OpenAI API key (required for AI roasts)
+- `FLASK_DEBUG`: Enable/disable debug mode (default: False)
+- `PORT`: Port for the Flask application (default: 5000)
+- `HOST`: Host IP address (default: 0.0.0.0)
 
 ### Flask Configuration
 
 The app runs with the following default settings:
 - Host: 0.0.0.0
 - Port: 5000
-- Debug: True (development only)
+- Debug: False (set via environment variable)
+- Threaded: True
 
 ## Security Considerations
 
 - **API Key Protection**: Never commit API keys to version control
-- **HTTPS**: Use HTTPS in production
+- **HTTPS**: Always use HTTPS in production
 - **Rate Limiting**: Consider implementing rate limiting for API endpoints
-- **Input Validation**: Passwords are analyzed but not stored
+- **Input Validation**: Passwords are analyzed but not stored or logged
 - **CORS**: Configured for cross-origin requests (adjust as needed)
+- **XSS Prevention**: Input sanitization for malicious patterns
+- **Privacy**: No password storage or persistent logging
+
+## Testing
+
+Run the test suite:
+```bash
+pytest tests/
+```
+
+Test the application with various password types:
+- Weak passwords (short, common words)
+- Strong passwords (long, complex)
+- Edge cases (empty, special characters, unicode)
+- Breached passwords
+- Dictionary words in multiple languages
 
 ## Contributing
 
@@ -303,13 +411,7 @@ The app runs with the following default settings:
 - Add tests for new features
 - Update documentation for API changes
 - Ensure backward compatibility
-
-## Testing
-
-Run the application and test with various password types:
-- Weak passwords (short, common words)
-- Strong passwords (long, complex)
-- Edge cases (empty, special characters, unicode)
+- Use type hints in Python code
 
 ## License
 
@@ -319,6 +421,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - OpenAI for providing the GPT API
 - Flask community for the excellent web framework
+- Have I Been Pwned for breach data
 - Security researchers for password analysis techniques
 
 ## Support
@@ -364,6 +467,7 @@ python BACKEND/app.py
 - [ ] Integration with password managers
 - [ ] Advanced AI models for better roasts
 - [ ] Multi-language support for roasts
+- [ ] Password strength over time tracking
 
 ---
 
