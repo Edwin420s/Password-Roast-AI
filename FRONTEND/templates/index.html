@@ -233,18 +233,18 @@
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
     <div class="container">
         <header class="mb-8 text-center">
-            <h1 class="text-5xl font-extrabold mb-2">🔥 Password Roast AI</h1>
+            <h1 class="text-5xl font-extrabold mb-2">Password Roast AI</h1>
             <p class="text-lg text-gray-300 max-w-xl mx-auto">We roast weak passwords so you don't get burned! Enter your password below to get started.</p>
         </header>
         <section>
             <div class="flex gap-4">
-                <input type="password" id="passwordInput" class="input-password" placeholder="Enter your password to get roasted... 🔥" aria-label="Password input" />
-                <button id="togglePassword" class="btn-primary" aria-label="Toggle password visibility">👁️</button>
-                <button id="roastButton" class="btn-primary">Roast Me! 🔥</button>
+                <input type="password" id="passwordInput" class="input-password" placeholder="Enter your password to get roasted..." aria-label="Password input" />
+                <button id="togglePassword" class="btn-primary" aria-label="Toggle password visibility">Show</button>
+                <button id="roastButton" class="btn-primary">Roast Me!</button>
             </div>
             <div class="loading" id="loading" role="status" aria-live="polite" aria-busy="true">
                 <div class="spinner"></div>
-                <p>Analyzing your password... 🕵️</p>
+                <p>Analyzing your password...</p>
             </div>
             <div class="strength-meter mt-4 h-4 rounded-full bg-gray-700 overflow-hidden">
                 <div id="strengthFill" class="strength-fill"></div>
@@ -277,7 +277,7 @@
                 </div>
             </div>
             <div class="suggestions" id="suggestionsBox" aria-label="Suggestions for improvement">
-                <h3>💡 Suggestions for Improvement</h3>
+                <h3>Suggestions for Improvement</h3>
                 <ul id="suggestionsList"></ul>
             </div>
             <div id="weaknessDetails" class="weakness-section" aria-label="Detected weaknesses">
